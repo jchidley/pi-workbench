@@ -10,6 +10,8 @@ description: >-
 
 Use this skill when a task touches durable project knowledge, source ingestion, evidence review, local work items, or implementation documentation.
 
+`pi-workbench` is the workflow layer; model providers are replaceable execution engines. Keep durable truth in repo-local files, not hidden provider memory.
+
 ## Layers
 
 - `raw/` is immutable evidence: transcripts, manuals, measurements, logs, session JSONL extracts, web snapshots.
@@ -37,7 +39,7 @@ After work:
 
 Enforce seams, not every thought.
 
-Hard-enforce implementation truth, broken links, missing source provenance, and test specs. Keep exploratory wiki notes lightweight.
+Hard-enforce implementation truth, broken links, missing source provenance, and test specs. Keep exploratory wiki notes lightweight. Automatic checks should be pass-quiet and fail-loud: do not clutter chat with successful guard output, but fix failures before completion.
 
 ## Code refs
 

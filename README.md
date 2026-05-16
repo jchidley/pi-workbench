@@ -7,7 +7,7 @@ Evidence-first Markdown workbench for `pi-coding-agent`.
 - Karpathy-style LLM wiki: raw sources are preserved, agents maintain a flexible Markdown synthesis layer.
 - lat.md-style enforcement: implementation-critical knowledge is checked with links, section structure, and optional code/test backlinks.
 
-It is designed for Jack-style pi workflows: practical tasks, original-source provenance, local automation, no mandatory SaaS ticket frontend.
+It is designed for Jack-style pi workflows: practical tasks, original-source provenance, local automation, no mandatory SaaS ticket frontend, and replaceable model providers. See [docs/strategy.md](docs/strategy.md).
 
 ## Project shape
 
@@ -50,7 +50,7 @@ The guard is implemented as a pi extension event handler, not as a separate item
 When loaded as a pi extension in a repo containing `.workbench/config.toml`, pi-workbench installs an `agent_end` guard:
 
 1. run `./scripts/check.sh` when present, otherwise `pi-workbench check`
-2. if checks pass, set the workbench status to `guard passed` and record a hidden pass message
+2. if checks pass, set the workbench status to `guard passed` and record a hidden session entry
 3. if checks fail, set the workbench status to `guard failed` and send the failure back to the agent as a follow-up user message
 
 On session start it also shows `workbench: guard active` in the UI status area and notifies that the guard is active.

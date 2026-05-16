@@ -59,14 +59,14 @@ export default function(pi: ExtensionAPI) {
 
     guardRunning = true;
     try {
-      const text = await runGuard(cwd);
+      await runGuard(cwd);
       guardFeedbackInFlight = false;
       if (ctx.hasUI) ctx.ui.setStatus("workbench", "guard passed");
-      pi.sendMessage({
-        customType: "workbench-check",
-        content: `pi-workbench guard passed.\n\n${text}`,
-        display: false,
-      }, { triggerTurn: false });
+      pi.appendEntry("workbench-check", {
+        status: "passed",
+        timestamp: new Date().toISOString(),
+        cwd,
+      });
     } catch (err: any) {
       const message = String(err?.message || err);
       if (ctx.hasUI) ctx.ui.setStatus("workbench", "guard failed");
