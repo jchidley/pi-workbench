@@ -43,6 +43,20 @@ pi-workbench task done <task-file>
 pi-workbench session import <session.jsonl>
 ```
 
+## Default guard
+
+When loaded as a pi extension in a repo containing `.workbench/config.toml`, pi-workbench runs a guard at the end of each agent prompt:
+
+1. run `./scripts/check.sh` when present, otherwise `pi-workbench check`
+2. if checks pass, record a hidden pass message
+3. if checks fail, send the failure back to the agent as a follow-up user message
+
+Disable temporarily with:
+
+```bash
+PI_WORKBENCH_GUARD=0 pi
+```
+
 ## Philosophy
 
 Enforce seams, not every thought.
