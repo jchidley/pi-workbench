@@ -27,7 +27,7 @@ function init(){
   writeNew('wiki/log.md', '# Wiki Log\n\nAppend-only log of ingests, queries, reviews, and important updates.\n\n');
   writeNew('wiki/sources.md', '# Sources\n\nCatalogue of raw sources and external links used by the wiki.\n\n');
   writeNew('wiki/open-questions.md', '# Open Questions\n\nQuestions not yet resolved by current evidence.\n\n');
-  writeNew('lattice/index.md', '# Lattice Index\n\nCanonical implementation/project knowledge graph for code-affecting truth.\n\n- [[architecture]] — System shape and module boundaries\n- [[domain]] — Project domain concepts that affect implementation\n- [[constraints]] — Hard boundaries, gotchas, and safety rules\n- [[decisions]] — Durable implementation decisions\n- [[tests]] — Executable behaviour specs\n');
+  writeNew('lattice/index.md', '# Lattice Index\n\nCanonical implementation/project knowledge graph for code-affecting truth.\n\n- [[lattice/architecture#Architecture|Architecture]] — System shape and module boundaries\n- [[lattice/domain#Domain|Domain]] — Project domain concepts that affect implementation\n- [[lattice/constraints#Constraints|Constraints]] — Hard boundaries, gotchas, and safety rules\n- [[lattice/decisions#Decisions|Decisions]] — Durable implementation decisions\n- [[lattice/tests#Tests|Tests]] — Executable behaviour specs\n');
   writeNew('lattice/architecture.md', '# Architecture\n\nCurrent implementation architecture and module boundaries.\n\n');
   writeNew('lattice/domain.md', '# Domain\n\nDomain concepts that the implementation depends on.\n\n');
   writeNew('lattice/constraints.md', '# Constraints\n\nHard rules, gotchas, and safety boundaries that implementation must preserve.\n\n');
