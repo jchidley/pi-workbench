@@ -42,6 +42,32 @@ Models are execution engines. The workflow layer is the asset.
 - `lattice/` — checked implementation/project truth.
 - `work/` — local work queue and state machine.
 
+## Wikilink dialect
+
+`pi-workbench` uses an Obsidian/Foam-compatible wikilink subset so the same files can be browsed in either tool.
+
+Supported authoring forms:
+
+```text
+[[page]]
+[[page#Heading]]
+[[path/to/page]]
+[[path/to/page#Heading]]
+[[page|Alias]]
+[[page#Heading|Alias]]
+```
+
+Avoid tool-specific forms for portable project truth:
+
+```text
+![[embed]]
+[[page^block-id]]
+[[alias|page]]
+[Alias]([[page]])
+```
+
+Prefer lowercase slug filenames without spaces. Headings may contain spaces, but stable implementation references should use simple heading text.
+
 ## Provider independence
 
 `pi-workbench` should work with Claude, Codex, Gemini, DeepSeek, Qwen, GLM, local models, and future providers through pi. It should not rely on hidden provider memory for correctness.

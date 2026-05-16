@@ -41,6 +41,20 @@ Enforce seams, not every thought.
 
 Hard-enforce implementation truth, broken links, missing source provenance, and test specs. Keep exploratory wiki notes lightweight. Automatic checks should be pass-quiet and fail-loud: do not clutter chat with successful guard output, but fix failures before completion.
 
+## Wikilinks
+
+Use the Obsidian/Foam-compatible subset:
+
+```text
+[[page]]
+[[page#Heading]]
+[[path/to/page#Heading]]
+[[page|Alias]]
+[[page#Heading|Alias]]
+```
+
+Avoid embeds (`![[...]]`), block IDs (`[[page^block-id]]`), reversed aliases (`[[alias|page]]`), and Logseq-style `[Alias]([[page]])` links in portable project truth.
+
 ## Code refs
 
 Use implementation backlinks where useful:

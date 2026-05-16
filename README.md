@@ -20,6 +20,17 @@ lattice/    enforced implementation/project knowledge graph
 work/       local Markdown task queue
 ```
 
+Markdown links use an Obsidian/Foam-compatible wikilink subset:
+
+```text
+[[page]]
+[[page#Heading]]
+[[page|Alias]]
+[[page#Heading|Alias]]
+```
+
+Avoid embeds, block IDs, and Logseq/Dendron-specific alias forms for portable project truth.
+
 ## Install locally in a project
 
 During development, add this package to a project-local pi settings file:

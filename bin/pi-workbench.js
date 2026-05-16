@@ -66,8 +66,14 @@ function check(){
   for(const f of files('lattice')) errors.push(...leadingParagraphErrors(f));
   for(const f of md){
     const text=fs.readFileSync(f,'utf8');
-    for(const m of text.matchAll(/\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)){
-      const target=m[1].trim();
+    for(const m of text.matchAll(/(!?)\[\[([^\]]+)\]\]/g)){
+      const bang=m[1];
+      const body=m[2].trim();
+      if(bang) errors.push(`${rel(f)} uses embed ![[${body}]]; portable Obsidian/Foam truth should use normal wikilinks`);
+      if(body.includes('^')) errors.push(`${rel(f)} uses block-id wikilink [[${body}]]; block links are not portable enough for workbench truth`);
+      const [rawTarget, alias] = body.split('|', 2).map(s=>s.trim());
+      if(alias && rawTarget.includes(' ')==false && alias.includes('/') ) warnings.push(`${rel(f)} possible reversed alias [[${body}]]; use [[target|Alias]]`);
+      const target=rawTarget;
       if(target.startsWith('http') || target.startsWith('../') || target.startsWith('./')) continue;
       const norm=target.replace(/\.md#/,'#').replace(/\.md$/,'');
       if(!allSections.has(norm) && !stems.has(norm) && !fs.existsSync(path.join(cwd,target))) warnings.push(`${rel(f)} unresolved wiki link [[${target}]]`);
