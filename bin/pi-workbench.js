@@ -22,7 +22,7 @@ function rel(p){ return path.relative(cwd,p).replaceAll(path.sep,'/'); }
 
 function init(){
   ['raw/transcripts','raw/measurements','raw/manuals','raw/sessions','wiki/concepts','wiki/field-notes','wiki/evidence-reviews','lattice','work/inbox','work/active','work/review','work/done','.workbench','scripts'].forEach(mkdirp);
-  writeNew('.workbench/config.toml', `[paths]\nraw = "raw"\nwiki = "wiki"\nlattice = "lattice"\nwork = "work"\n\n[checks]\nrequire_wiki_sources = true\nrequire_lattice_leading_paragraphs = true\n\n[commands]\ntest = "cargo test"\n`);
+  writeNew('.workbench/config.toml', `[paths]\nraw = "raw"\nwiki = "wiki"\nlattice = "lattice"\nwork = "work"\n\n[checks]\nrequire_wiki_sources = true\nrequire_lattice_leading_paragraphs = true\n\n[commands]\ntest = "cargo test"\n\n[model_policy]\ncheap = "bulk session import, source triage, wiki/index maintenance, repetitive checks"\nmid = "routine implementation, tests, source synthesis, lattice updates"\npremium = "hard architecture, subtle debugging, high-risk review, final judgement"\n`);
   writeNew('wiki/index.md', '# Wiki Index\n\nFlexible synthesis index for source-derived knowledge and field notes.\n\n');
   writeNew('wiki/log.md', '# Wiki Log\n\nAppend-only log of ingests, queries, reviews, and important updates.\n\n');
   writeNew('wiki/sources.md', '# Sources\n\nCatalogue of raw sources and external links used by the wiki.\n\n');

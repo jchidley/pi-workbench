@@ -10,7 +10,7 @@ description: >-
 
 Use this skill when a task touches durable project knowledge, source ingestion, evidence review, local work items, or implementation documentation.
 
-`pi-workbench` is the workflow layer; model providers are replaceable execution engines. Keep durable truth in repo-local files, not hidden provider memory.
+`pi-workbench` is the workflow layer; model providers are replaceable execution engines. Keep durable truth in repo-local files, not hidden provider memory. Prefer cheap models for reversible bulk maintenance, mid models for routine implementation, and premium models for high-risk judgement.
 
 ## Layers
 

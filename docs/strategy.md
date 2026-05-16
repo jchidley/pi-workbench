@@ -45,3 +45,33 @@ Models are execution engines. The workflow layer is the asset.
 ## Provider independence
 
 `pi-workbench` should work with Claude, Codex, Gemini, DeepSeek, Qwen, GLM, local models, and future providers through pi. It should not rely on hidden provider memory for correctness.
+
+## Cost and capability direction
+
+Assume model capability commoditises faster than workflow quality.
+
+Current frontier US models are already good enough for most coding and documentation work, but their providers have incentives to keep the best workflow features inside their own frontends or premium APIs. Chinese and other low-cost labs are likely to keep compressing the price of good-enough coding, long-context summarisation, and bulk maintenance.
+
+Design implication: `pi-workbench` should support a model portfolio rather than a single preferred model.
+
+```text
+cheap models
+  -> bulk session import, source triage, wiki index maintenance, repetitive checks
+
+mid models
+  -> routine implementation, tests, synthesis, lattice updates
+
+premium models
+  -> hard architecture, subtle debugging, high-risk review, final judgement
+```
+
+Checks and promotion rules must remain model-independent. A cheap model may draft memory; only evidence, review, and checks decide what becomes instruction-grade project truth.
+
+## Escalation policy
+
+Workflows should make escalation explicit:
+
+- Use cheap models for reversible, evidence-preserving transformations.
+- Use mid models for ordinary implementation with tests.
+- Use premium models when failure cost is high, ambiguity remains after evidence review, or architectural direction is being set.
+- Never rely on model reputation alone; require local evidence and executable checks.

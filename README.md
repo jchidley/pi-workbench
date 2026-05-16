@@ -7,7 +7,7 @@ Evidence-first Markdown workbench for `pi-coding-agent`.
 - Karpathy-style LLM wiki: raw sources are preserved, agents maintain a flexible Markdown synthesis layer.
 - lat.md-style enforcement: implementation-critical knowledge is checked with links, section structure, and optional code/test backlinks.
 
-It is designed for Jack-style pi workflows: practical tasks, original-source provenance, local automation, no mandatory SaaS ticket frontend, and replaceable model providers. See [docs/strategy.md](docs/strategy.md).
+It is designed for Jack-style pi workflows: practical tasks, original-source provenance, local automation, no mandatory SaaS ticket frontend, and replaceable model providers. The durable asset is the workflow/evidence/check layer; models are swappable compute. See [docs/strategy.md](docs/strategy.md).
 
 ## Project shape
 
