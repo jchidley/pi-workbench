@@ -52,7 +52,7 @@ Assume model capability commoditises faster than workflow quality.
 
 Current frontier US models are already good enough for most coding and documentation work, but their providers have incentives to keep the best workflow features inside their own frontends or premium APIs. Chinese and other low-cost labs are likely to keep compressing the price of good-enough coding, long-context summarisation, and bulk maintenance.
 
-Design implication: `pi-workbench` should support a model portfolio rather than a single preferred model.
+Design implication: `pi-workbench` should support a model portfolio rather than a single preferred model. A repo can still choose a practical current default, such as an OpenAI subscription, while keeping the workflow portable if provider economics or terms change.
 
 ```text
 cheap models
