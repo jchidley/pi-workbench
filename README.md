@@ -61,6 +61,17 @@ Disable temporarily with:
 PI_WORKBENCH_GUARD=0 pi
 ```
 
+## Influences
+
+`pi-workbench` is original code, but intentionally borrows ideas from several projects and patterns:
+
+- [`1st1/lat.md`](https://github.com/1st1/lat.md) — enforced Markdown knowledge graph, checked links, implementation backlinks, and test-spec coverage ideas.
+- [Karpathy's LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — immutable raw sources, LLM-maintained wiki synthesis, index/log files, and compounding source ingestion.
+- [`openai/symphony`](https://github.com/openai/symphony) — work-item-driven agent automation, repeatable checks, and orchestration concepts. `pi-workbench` uses local Markdown tasks instead of Linear or another ticket frontend.
+- [`NateBJones-Projects/OB1`](https://github.com/NateBJones-Projects/OB1) — cross-tool memory and provenance ideas. `pi-workbench` currently stays filesystem/Markdown-first rather than database-backed.
+
+No source code has been copied from these projects.
+
 ## Philosophy
 
 Enforce seams, not every thought.
