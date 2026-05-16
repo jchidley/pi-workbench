@@ -1,6 +1,9 @@
 ---
 name: workbench
-description: Maintain pi-workbench repos: ingest evidence, update wiki synthesis, update enforced lattice implementation docs, manage local Markdown tasks, and run checks.
+description: >-
+  Maintain pi-workbench repos by ingesting evidence, updating wiki synthesis,
+  updating enforced lattice implementation docs, managing local Markdown tasks,
+  and running checks.
 ---
 
 # pi-workbench Skill
