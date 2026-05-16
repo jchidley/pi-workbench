@@ -45,11 +45,15 @@ pi-workbench session import <session.jsonl>
 
 ## Default guard
 
-When loaded as a pi extension in a repo containing `.workbench/config.toml`, pi-workbench runs a guard at the end of each agent prompt:
+The guard is implemented as a pi extension event handler, not as a separate item in pi's startup list. You will see only `workbench` under `[Extensions]`; the hook is inside that extension.
+
+When loaded as a pi extension in a repo containing `.workbench/config.toml`, pi-workbench installs an `agent_end` guard:
 
 1. run `./scripts/check.sh` when present, otherwise `pi-workbench check`
-2. if checks pass, record a hidden pass message
-3. if checks fail, send the failure back to the agent as a follow-up user message
+2. if checks pass, set the workbench status to `guard passed` and record a hidden pass message
+3. if checks fail, set the workbench status to `guard failed` and send the failure back to the agent as a follow-up user message
+
+On session start it also shows `workbench: guard active` in the UI status area and notifies that the guard is active.
 
 Disable temporarily with:
 

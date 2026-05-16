@@ -38,6 +38,19 @@ export default function(pi: ExtensionAPI) {
   let guardRunning = false;
   let guardFeedbackInFlight = false;
 
+  pi.on("session_start", async (_event, ctx) => {
+    const cwd = process.cwd();
+    if (!isWorkbenchRepo(cwd)) return;
+    if (process.env.PI_WORKBENCH_GUARD === "0") {
+      if (ctx.hasUI) ctx.ui.setStatus("workbench", "guard disabled");
+      return;
+    }
+    if (ctx.hasUI) {
+      ctx.ui.setStatus("workbench", "guard active");
+      ctx.ui.notify("pi-workbench guard active: ./scripts/check.sh will run after each agent prompt", "info");
+    }
+  });
+
   pi.on("agent_end", async (_event, ctx) => {
     const cwd = process.cwd();
     if (!isWorkbenchRepo(cwd)) return;
@@ -48,7 +61,7 @@ export default function(pi: ExtensionAPI) {
     try {
       const text = await runGuard(cwd);
       guardFeedbackInFlight = false;
-      if (ctx.hasUI) ctx.ui.setStatus("workbench", "check passed");
+      if (ctx.hasUI) ctx.ui.setStatus("workbench", "guard passed");
       pi.sendMessage({
         customType: "workbench-check",
         content: `pi-workbench guard passed.\n\n${text}`,
@@ -56,6 +69,7 @@ export default function(pi: ExtensionAPI) {
       }, { triggerTurn: false });
     } catch (err: any) {
       const message = String(err?.message || err);
+      if (ctx.hasUI) ctx.ui.setStatus("workbench", "guard failed");
       if (ctx.hasUI) ctx.ui.notify("pi-workbench guard failed; sending failure back to agent", "error");
       if (!guardFeedbackInFlight) {
         guardFeedbackInFlight = true;
