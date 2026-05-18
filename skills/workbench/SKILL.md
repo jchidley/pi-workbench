@@ -14,10 +14,12 @@ Use this skill when a task touches durable project knowledge, source ingestion, 
 
 ## Layers
 
-- `raw/` is immutable evidence: transcripts, manuals, measurements, logs, session JSONL extracts, web snapshots.
-- `wiki/` is flexible LLM-maintained synthesis: concepts, field notes, source summaries, open questions.
+- `raw/` is immutable evidence: YouTube transcripts, Pi lite transcripts, manuals, measurements, logs, session JSONL extracts, browser/link snapshots, web snapshots.
+- `wiki/` is flexible LLM-maintained synthesis: concepts, field notes, source summaries, workflow reviews, curated link/playlist pages, open questions.
 - `lattice/` is enforced implementation/project truth: architecture, domain constraints, device interfaces, data model, test specs.
 - `work/` is a local Markdown work queue: `inbox/`, `active/`, `review/`, `done/`.
+
+Transcripts and link collections are evidence, not automatically wiki content. Promote only the parts that become durable knowledge, useful synthesis, curated links/playlists, or open questions.
 
 ## Operating rules
 
@@ -30,16 +32,19 @@ Before implementation work:
 After work:
 
 1. Update `lattice/` for code-affecting changes: architecture, CLI behaviour, file formats, device assumptions, tests, constraints.
-2. Update `wiki/` for source synthesis, field observations, learning, or interpretation changes.
+2. Update `wiki/` for durable source synthesis, field observations, learning, interpretation changes, curated links/playlists, or workflow reviews.
 3. Preserve provenance: source-derived wiki pages should include a `## Sources` section with local raw paths and external URLs.
-4. Run `pi-workbench check` and the repo's `scripts/check.sh` if present.
-5. Do not declare completion if hard checks fail.
+4. File back important query answers only when they create reusable knowledge; leave transient chat in the session transcript.
+5. Run `pi-workbench check` and the repo's `scripts/check.sh` if present.
+6. Do not declare completion if hard checks fail.
 
 ## Enforcement philosophy
 
 Enforce seams, not every thought.
 
 Hard-enforce implementation truth, broken links, missing source provenance, and test specs. Keep exploratory wiki notes lightweight. Automatic checks should be pass-quiet and fail-loud: do not clutter chat with successful guard output, but fix failures before completion.
+
+Prefer a better note over a new tool. Do not add databases, embeddings, MCP servers, scheduled ingestion, or APIs until plain Markdown, `rg`, and small scripts become limiting.
 
 ## Wikilinks
 

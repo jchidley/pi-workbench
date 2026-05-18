@@ -29,18 +29,22 @@ Models are execution engines. The workflow layer is the asset.
 
 1. **Repo-local truth** — if it matters, it lives in Git as Markdown, code, scripts, or raw evidence.
 2. **Evidence before memory** — agent conclusions start as evidence or synthesis; only promoted facts become implementation truth.
-3. **Model-agnostic** — no required Claude/OpenAI/Gemini-specific memory or frontend feature.
-4. **Local-first automation** — use Markdown work queues and scripts before SaaS trackers.
-5. **Executable enforcement** — checks must run outside the model and fail loudly.
-6. **Pass quiet, fail loud** — successful automatic checks should not clutter chat; failures must be fed back to the agent.
-7. **Enforce seams, not every thought** — strict for code-affecting truth and provenance, flexible for exploratory wiki work.
+3. **Promote selectively** — transcripts, link dumps, and AI session artifacts are evidence, not maintained knowledge by default.
+4. **Model-agnostic** — no required Claude/OpenAI/Gemini-specific memory or frontend feature.
+5. **Local-first automation** — use Markdown work queues and scripts before SaaS trackers.
+6. **Executable enforcement** — checks must run outside the model and fail loudly.
+7. **Pass quiet, fail loud** — successful automatic checks should not clutter chat; failures must be fed back to the agent.
+8. **Enforce seams, not every thought** — strict for code-affecting truth and provenance, flexible for exploratory wiki work.
+9. **YAGNI** — prefer better notes, `rg`, and small scripts before databases, embeddings, MCP servers, scheduled ingestion, or APIs.
 
 ## Knowledge layers
 
-- `raw/` — immutable evidence.
-- `wiki/` — flexible LLM-maintained synthesis.
+- `raw/` — immutable evidence: YouTube transcripts, Pi lite transcripts, manuals, measurements, logs, browser/history link captures, web snapshots.
+- `wiki/` — flexible LLM-maintained synthesis: source notes, concepts, field notes, workflow reviews, curated links/playlists, open questions.
 - `lattice/` — checked implementation/project truth.
 - `work/` — local work queue and state machine.
+
+Useful query answers can be filed back into `wiki/` when they create reusable knowledge. Transient chat stays in session history.
 
 ## Wikilink dialect
 

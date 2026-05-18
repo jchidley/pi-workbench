@@ -14,11 +14,13 @@ It is designed for Jack-style pi workflows: practical tasks, original-source pro
 A repo using pi-workbench contains:
 
 ```text
-raw/        immutable evidence: transcripts, measurements, manuals, session extracts
-wiki/       flexible RF/domain/source synthesis maintained by agents
+raw/        immutable evidence: YouTube/Pi transcripts, measurements, manuals, session extracts, link snapshots
+wiki/       flexible domain/source synthesis: concepts, source notes, reviews, curated links/playlists, questions
 lattice/    enforced implementation/project knowledge graph
 work/       local Markdown task queue
 ```
+
+Transcripts, browser-history exports, and raw link dumps are evidence. They are promoted into `wiki/` only when they become durable knowledge, useful synthesis, curated links/playlists, workflow reviews, or open questions.
 
 Markdown links use an Obsidian/Foam-compatible wikilink subset:
 
@@ -88,3 +90,5 @@ No source code has been copied from these projects.
 Enforce seams, not every thought.
 
 Hard checks are for broken links, missing source provenance, implementation references, and task completion. Exploratory wiki notes stay lightweight and useful.
+
+Jack's usual source-to-wiki flow is project-local: collect evidence in `raw/`, synthesize only the useful parts into `wiki/`, and promote only code-affecting truth into `lattice/`. Prefer Markdown, `rg`, and small scripts before adding databases, embeddings, MCP servers, scheduled ingestion, or APIs.
