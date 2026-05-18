@@ -37,6 +37,8 @@ Models are execution engines. The workflow layer is the asset.
 8. **Enforce seams, not every thought** — strict for code-affecting truth and provenance, flexible for exploratory wiki work.
 9. **YAGNI** — prefer better notes, `rg`, and small scripts before databases, embeddings, MCP servers, scheduled ingestion, or APIs.
 
+Repeated source workflows can have small reusable helpers without becoming separate systems. YouTube transcript playlist curation is one such workflow: keep transcript evidence and ordered playlist IDs project-local, generate review notes with `pi-workbench youtube playlist`, and use YouTube APIs only for final account playlist creation.
+
 ## Knowledge layers
 
 - `raw/` — immutable evidence: YouTube transcripts, Pi lite transcripts, manuals, measurements, logs, browser/history link captures, web snapshots.

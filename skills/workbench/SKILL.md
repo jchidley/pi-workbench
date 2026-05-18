@@ -37,6 +37,21 @@ Promote from `wiki/` to `lattice/` only when it affects implementation truth: ar
 
 `lattice/` is the current pi-workbench canonical truth layer. `lat.md` is the preferred future/checkable successor model for that layer. Do not run both in one project unless deliberately migrating.
 
+## Repeated YouTube/transcript playlist workflow
+
+Use the built-in workflow when a project repeatedly turns YouTube material into study playlists or curated learning paths. Keep it inside the project workbench:
+
+1. Discover candidate videos with web search, channel/playlist pages, or `yt-dlp ytsearch`.
+2. Download or reuse transcripts before judging relevance.
+3. Search/rank locally with `rg` and LLM judgement.
+4. Store stable ordered IDs in `data/playlists/<name>.ids`.
+5. Generate a Markdown playlist note with `pi-workbench youtube playlist --ids data/playlists/<name>.ids --title "..."`.
+6. Use the generated `watch_videos` URL for review only; it may appear as an unsavable YouTube "Untitled List".
+7. Create real YouTube account playlists only after the order is stable, preferably by official YouTube Data API; avoid quota-expensive replace cycles.
+8. YouTube app offline download remains manual: open the final playlist and tap Download.
+
+Promote transcript/playlist material into `wiki/` only when it creates durable learning, curated annotated lists, workflow reviews, or open questions.
+
 ## Operating rules
 
 Before implementation work:

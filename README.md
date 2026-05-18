@@ -56,7 +56,10 @@ pi-workbench status
 pi-workbench task next
 pi-workbench task done <task-file>
 pi-workbench session import <session.jsonl>
+pi-workbench youtube playlist --ids data/playlists/example.ids --title "Example Study Playlist"
 ```
+
+Repeated YouTube/transcript curation is a built-in workflow, not a separate system. See [docs/workflows/youtube-transcript-playlists.md](docs/workflows/youtube-transcript-playlists.md) for the transcript-first pattern: discover, download/reuse transcripts, rank locally, store ordered IDs in `data/playlists/*.ids`, generate playlist notes, then create real YouTube playlists only when final.
 
 ## Default guard
 

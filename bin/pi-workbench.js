@@ -12,6 +12,18 @@ const dirs = {
 function mkdirp(p){ fs.mkdirSync(path.join(cwd,p), {recursive:true}); }
 function exists(p){ return fs.existsSync(path.join(cwd,p)); }
 function writeNew(p, s){ const f=path.join(cwd,p); if(!fs.existsSync(f)) fs.writeFileSync(f,s); }
+function parseFlags(xs){
+  const out={_:[]};
+  for(let i=0;i<xs.length;i++){
+    const x=xs[i];
+    if(!x.startsWith('--')) { out._.push(x); continue; }
+    const eq=x.indexOf('=');
+    if(eq!==-1) out[x.slice(2,eq)] = x.slice(eq+1);
+    else if(xs[i+1] && !xs[i+1].startsWith('--')) out[x.slice(2)] = xs[++i];
+    else out[x.slice(2)] = true;
+  }
+  return out;
+}
 function files(dir, exts=['.md']){
   const root=path.join(cwd,dir); if(!fs.existsSync(root)) return [];
   const out=[]; const walk=d=>{ for(const e of fs.readdirSync(d,{withFileTypes:true})){
@@ -21,7 +33,7 @@ function files(dir, exts=['.md']){
 function rel(p){ return path.relative(cwd,p).replaceAll(path.sep,'/'); }
 
 function init(){
-  ['raw/transcripts','raw/measurements','raw/manuals','raw/sessions','wiki/concepts','wiki/field-notes','wiki/evidence-reviews','lattice','work/inbox','work/active','work/review','work/done','.workbench','scripts'].forEach(mkdirp);
+  ['raw/transcripts','raw/measurements','raw/manuals','raw/sessions','wiki/concepts','wiki/field-notes','wiki/evidence-reviews','lattice','work/inbox','work/active','work/review','work/done','data/playlists','.workbench','scripts'].forEach(mkdirp);
   writeNew('.workbench/config.toml', `[paths]\nraw = "raw"\nwiki = "wiki"\nlattice = "lattice"\nwork = "work"\n\n[checks]\nrequire_wiki_sources = true\nrequire_lattice_leading_paragraphs = true\n\n[commands]\ntest = "cargo test"\n\n[model_policy]\ncheap = "bulk session import, source triage, wiki/index maintenance, repetitive checks"\nmid = "routine implementation, tests, source synthesis, lattice updates"\npremium = "hard architecture, subtle debugging, high-risk review, final judgement"\n`);
   writeNew('wiki/index.md', '# Wiki Index\n\nFlexible synthesis index for source-derived knowledge and field notes.\n\n');
   writeNew('wiki/log.md', '# Wiki Log\n\nAppend-only log of ingests, queries, reviews, and important updates.\n\n');
@@ -115,15 +127,34 @@ function sessionImport(p){
   fs.appendFileSync(path.join(cwd,'wiki/log.md'), `\n## [${new Date().toISOString().slice(0,10)}] session-import | ${path.basename(p)}\n\nImported to \`${rel(dst)}\`.\n\nUser prompts:\n${users.slice(0,12).map(u=>`- ${String(u).replace(/\n/g,' ').slice(0,240)}`).join('\n')}\n`);
   console.log(`Imported ${p} -> ${rel(dst)}`);
 }
+function youtubePlaylist(opts){
+  if(!opts.ids) throw new Error('youtube playlist requires --ids <data/playlists/name.ids>');
+  const idsPath=path.join(cwd, opts.ids);
+  if(!fs.existsSync(idsPath)) throw new Error(`ids file not found: ${opts.ids}`);
+  const ids=fs.readFileSync(idsPath,'utf8').split(/\r?\n/).map(l=>l.trim()).filter(l=>l && !l.startsWith('#'));
+  if(!ids.length) throw new Error(`ids file has no video ids: ${opts.ids}`);
+  const base=path.basename(opts.ids).replace(/\.ids$/,'');
+  const title=opts.title || base.replace(/[-_]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  const out=opts.out || `docs/${base}-playlist.md`;
+  mkdirp(path.dirname(out));
+  const watch=`https://www.youtube.com/watch_videos?video_ids=${ids.join(',')}`;
+  const finalUrl=opts['final-url'] || '';
+  const now=new Date().toISOString().slice(0,10);
+  const body=`# ${title}\n\nGenerated from \`${opts.ids}\` on ${now}.\n\n## Review URL\n\n${watch}\n\n${finalUrl ? `## Final YouTube playlist\n\n${finalUrl}\n\n` : '## Final YouTube playlist\n\n_Not created/recorded yet._\n\n'}## Ordered videos\n\n${ids.map((id,i)=>`${i+1}. https://www.youtube.com/watch?v=${id}`).join('\n')}\n\n## Notes\n\n- Treat this Markdown file and the \`.ids\` file as project-local durable playlist evidence.\n- Use the temporary \`watch_videos\` URL for review only; YouTube may show it as an unsavable Untitled List.\n- Create final account playlists with the official YouTube Data API only after the order is stable.\n- If using the YouTube app offline, open the final playlist and manually tap Download.\n`;
+  fs.writeFileSync(path.join(cwd,out), body);
+  console.log(`Wrote ${out}`);
+  console.log(watch);
+}
 
 try{
   const [cmd, sub, third] = args;
-  if(!cmd || cmd==='help' || cmd==='--help') console.log('Usage: pi-workbench init|check|status|task next|task done <path>|session import <jsonl>');
+  if(!cmd || cmd==='help' || cmd==='--help') console.log('Usage: pi-workbench init|check|status|task next|task done <path>|session import <jsonl>|youtube playlist --ids <file.ids> [--title <title>] [--out <doc.md>] [--final-url <url>]');
   else if(cmd==='init') init();
   else if(cmd==='check') check();
   else if(cmd==='status') status();
   else if(cmd==='task' && sub==='next') taskNext();
   else if(cmd==='task' && sub==='done') taskDone(third);
   else if(cmd==='session' && sub==='import') sessionImport(third);
+  else if(cmd==='youtube' && sub==='playlist') youtubePlaylist(parseFlags(args.slice(2)));
   else throw new Error(`unknown command: ${args.join(' ')}`);
 }catch(e){ console.error(`pi-workbench: ${e.message}`); process.exit(2); }
