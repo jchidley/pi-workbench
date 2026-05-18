@@ -20,7 +20,9 @@ lattice/    enforced implementation/project knowledge graph
 work/       local Markdown task queue
 ```
 
-Transcripts, browser-history exports, and raw link dumps are evidence. They are promoted into `wiki/` only when they become durable knowledge, useful synthesis, curated links/playlists, workflow reviews, or open questions.
+Transcripts, browser-history exports, and raw link dumps are evidence. They are promoted into `wiki/` only when they become durable knowledge, useful synthesis, curated links/playlists, workflow reviews, session-derived "what happened / what next" notes, field observations, or open questions.
+
+Promote from `wiki/` to `lattice/` only when the knowledge affects implementation truth: architecture, data model, CLI behaviour, device assumptions, constraints, file formats, or tests. `lattice/` is pi-workbench's current canonical truth layer; `lat.md` is the preferred future/checkable successor model. Do not run both in one project unless deliberately migrating.
 
 Markdown links use an Obsidian/Foam-compatible wikilink subset:
 

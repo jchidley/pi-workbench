@@ -46,6 +46,22 @@ Models are execution engines. The workflow layer is the asset.
 
 Useful query answers can be filed back into `wiki/` when they create reusable knowledge. Transient chat stays in session history.
 
+## Promotion discipline
+
+Most raw evidence should stay raw. Promote evidence into `wiki/` only when it becomes one of:
+
+- durable synthesis
+- reusable decision or lesson
+- curated link/playlist
+- field observation or measurement interpretation
+- open question
+- workflow review
+- session-derived "what happened / what next" note
+
+Promote from `wiki/` to `lattice/` only when it affects implementation truth: architecture, data model, CLI behaviour, device assumptions, constraints, file formats, or tests.
+
+`lattice/` is pi-workbench's current canonical truth layer. `lat.md` is the preferred future/checkable successor model for that layer. Do not run both in one project unless deliberately migrating.
+
 ## Wikilink dialect
 
 `pi-workbench` uses an Obsidian/Foam-compatible wikilink subset so the same files can be browsed in either tool.

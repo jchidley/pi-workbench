@@ -21,6 +21,22 @@ Use this skill when a task touches durable project knowledge, source ingestion, 
 
 Transcripts and link collections are evidence, not automatically wiki content. Promote only the parts that become durable knowledge, useful synthesis, curated links/playlists, or open questions.
 
+## Promotion discipline
+
+Most raw evidence should stay raw. Promote evidence into `wiki/` only when it becomes one of:
+
+- durable synthesis
+- reusable decision or lesson
+- curated link/playlist
+- field observation or measurement interpretation
+- open question
+- workflow review
+- session-derived "what happened / what next" note
+
+Promote from `wiki/` to `lattice/` only when it affects implementation truth: architecture, data model, CLI behaviour, device assumptions, constraints, file formats, or tests.
+
+`lattice/` is the current pi-workbench canonical truth layer. `lat.md` is the preferred future/checkable successor model for that layer. Do not run both in one project unless deliberately migrating.
+
 ## Operating rules
 
 Before implementation work:
